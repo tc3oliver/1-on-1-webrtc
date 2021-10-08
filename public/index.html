@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1on1 webrtc</title>
+  </head>
+  <body>
+    <div>
+      <label>切換麥克風:</label>
+      <select id="audioSource"></select>
+    </div>
+
+    <div>
+      <label>切換攝影機:</label>
+      <select id="videoSource"></select>
+    </div>
+
+    <div>
+      <button id="startBtn">開始</button>
+      <button id="leaveBtn">離開</button>
+      <button name="audio" id="audioBtn">關閉麥克風</button>
+      <button name="video" id="VideoBtn">關閉鏡頭</button>
+    </div>
+
+    <div>
+      <video muted width="320" autoplay playsinline id="localVideo"></video>
+      <video width="320" autoplay playsinline id="remoteVideo"></video>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
