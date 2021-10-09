@@ -4,7 +4,6 @@
 ## 啟動方式
 ```
 git clone https://github.com/tc3oliver/1-on-1-webrtc.git
-npm install
 docker build . -t 1-on-1-webrtc
 docker run -d --name webrtc  -p 8088:8088 1-on-1-webrtc
 ```
