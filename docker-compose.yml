@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  turn-server:
+    build: ./turn/
+    container_name: turn-server
+    image: turn
+    ports:
+      - "3478:3478/tcp"
+      - "3478:3478/udp"
+    networks:
+      - webrtc
+
+  signaling-server:
+    build: ./signaling/
+    container_name: signaling-server
+    image: signaling
+    ports:
+      - "8088:8088"
+    networks:
+      - webrtc
+
+networks:
+    webrtc:

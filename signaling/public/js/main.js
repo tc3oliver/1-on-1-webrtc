@@ -16,7 +16,11 @@ const selectors = [audioInputSelect, videoSelect]
 let localStream
 let peerConn
 let socket
+
 const room = 'room1'
+const TURN_SERVER_URL = '0.0.0.0:3478'
+const TURN_SERVER_USERNAME = 'username'
+const TURN_SERVER_CREDENTIAL = 'password'
 
 // ===================== 連線相關 =====================
 /**
@@ -24,7 +28,7 @@ const room = 'room1'
  */
 function connectIO() {
   // socket
-  socket = io('wss://0.0.0.0:8088')
+  socket = io('wss://192.168.0.131:8088')
 
   socket.on('ready', async (msg) => {
     console.log(msg)
@@ -103,7 +107,24 @@ function initPeerConnection() {
   const configuration = {
     iceServers: [
       {
-        urls: 'stun:stun.l.google.com:19302',
+        urls: 'stun:' + TURN_SERVER_URL + '?transport=tcp',
+        username: TURN_SERVER_USERNAME,
+        credential: TURN_SERVER_CREDENTIAL,
+      },
+      {
+        urls: 'stun:' + TURN_SERVER_URL + '?transport=udp',
+        username: TURN_SERVER_USERNAME,
+        credential: TURN_SERVER_CREDENTIAL,
+      },
+      {
+        urls: 'turn:' + TURN_SERVER_URL + '?transport=tcp',
+        username: TURN_SERVER_USERNAME,
+        credential: TURN_SERVER_CREDENTIAL,
+      },
+      {
+        urls: 'turn:' + TURN_SERVER_URL + '?transport=udp',
+        username: TURN_SERVER_USERNAME,
+        credential: TURN_SERVER_CREDENTIAL,
       },
     ],
   }
