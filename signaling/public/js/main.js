@@ -28,7 +28,7 @@ const TURN_SERVER_CREDENTIAL = 'password'
  */
 function connectIO() {
   // socket
-  socket = io('wss://192.168.0.131:8088')
+  socket = io('wss://0.0.0.0:8088')
 
   socket.on('ready', async (msg) => {
     console.log(msg)
@@ -89,6 +89,7 @@ async function createStream() {
     }
     // 取得影音的Stream
     const stream = await navigator.mediaDevices.getUserMedia(constraints)
+    
 
     // 提升作用域
     localStream = stream
@@ -133,6 +134,13 @@ function initPeerConnection() {
   // 增加本地串流
   localStream.getTracks().forEach((track) => {
     peerConn.addTrack(track, localStream)
+  })
+
+  localStream.getAudioTracks().forEach((item) => {
+    item.enabled = false
+  })
+  localStream.getVideoTracks().forEach((item) => {
+    item.enabled = false
   })
 
   // 找尋到 ICE 候選位置後，送去 Server 與另一位配對
@@ -221,8 +229,6 @@ async function init() {
   startBtn.disabled = true
   leaveBtn.disabled = false
 }
-
-
 
 
 
@@ -371,3 +377,13 @@ videoSelect.onchange = () => {
   switchDevice(false)
 }
 
+
+
+document.querySelector('button#test').onclick = () => {
+   localStream.getAudioTracks().forEach((item) => {
+     item.enabled = !item.enabled
+   })
+   localStream.getVideoTracks().forEach((item) => {
+     item.enabled = !item.enabled
+   })
+}
