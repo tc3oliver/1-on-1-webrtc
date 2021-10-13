@@ -3,5 +3,5 @@
 
 ## 啟動方式
 ```
-docker-compose -d up
+docker-compose up -d
 ```
